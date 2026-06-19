@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #ffdeeb; /* Background pink lembut */
+            /* Dekorasi latar belakang menggunakan ikon hati lucu */
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24' fill='%23ffb6c1' opacity='0.4'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%/svg%3E");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 4px solid #ffb6c1;
+            position: relative;
+        }
+
+        /* Semua slide disembunyikan di awal, kecuali slide 1 */
+        .slide {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Gaya Font Judul/Pesan Utama */
+        h1, h2, p {
+            color: #d63384;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            white-space: pre-line; /* Menjaga baris baru agar rapi */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 3px solid #ffb6c1;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        /* Form PIN di Slide 1 */
+        .pin-container {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        input[type="password"] {
+            padding: 12px 20px;
+            width: 80%;
+            border: 3px solid #ffb6c1;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            text-align: center;
+            outline: none;
+            font-family: 'Fredoka One', cursive;
+            color: #d63384;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+        input[type="password"]:focus {
+            border-color: #ff69b4;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+
+        /* Gaya Tombol */
+        button {
+            font-family: 'Fredoka One', cursive;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 5px 10px rgba(255, 105, 180, 0.3);
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #ff409f;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .btn-reset {
+            background-color: #6c757d;
+            box-shadow: 0 5px 10px rgba(108, 117, 125, 0.3);
+            font-size: 0.9rem;
+            padding: 8px 20px;
+            margin-top: 15px;
+        }
+        
+        .btn-reset:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="slide active" id="slide1">
+        <img src="https://cdn.phototourl.com/free/2026-06-18-253cbbe5-33fd-4b9b-81a9-81e14a53b37a.jpg" alt="Foto Slide 1">
+        <h1>Masukkan PIN Ulang Tahun</h1>
+        <div class="pin-container">
+            <input type="password" id="pinInput" placeholder="******" maxlength="6">
+            <div class="error-message" id="errorMsg"></div>
+            <button onclick="checkPin()">Buka ✨</button>
+        </div>
+    </div>
+
+    <div class="slide" id="slide2">
+        <p>maaf kalo aku nyakitin kamu</p>
+        <button onclick="nextSlide(3)">Next ➡️</button>
+    </div>
+
+    <div class="slide" id="slide3">
+        <p>maaf kalo aku jahat tapi aku ga pernah pergi gara gara perempuan lain</p>
+        <button onclick="nextSlide(4)">Next ➡️</button>
+    </div>
+
+    <div class="slide" id="slide4">
+        <p>aku cuma takut kamu hidup menderita sama aku</p>
+        <button onclick="nextSlide(5)">Next ➡️</button>
+    </div>
+
+    <div class="slide" id="slide5">
+        <p>tapi aku juga janji bakal balik lagi kalo kamu masih sendiri dan hidup aku udah baik baik aja
+
+itupun kalo kamu masih sudi nerima aku😇</p>
+        <button onclick="nextSlide(6)">Next ➡️</button>
+    </div>
+
+    <div class="slide" id="slide6">
+        <p>maaf kalo cara aku pergi bikin kamu sakit bangettt, maaf yaa kalo aku jahat</p>
+        <button onclick="nextSlide(7)">Next ➡️</button>
+    </div>
+
+    <div class="slide" id="slide7">
+        <p>selamat ulang tahun yaa
+sekali lagi aku minta maaf
+hidup dengan sehat manusia favorit ku🥺</p>
+        <button onclick="nextSlide(8)">Next ➡️</button>
+    </div>
+
+    <div class="slide" id="slide8">
+        <img src="https://cdn.phototourl.com/free/2026-06-18-5e22c03e-4967-4e74-9a67-30bb08f9fcae.jpg" alt="Foto Slide 8">
+        <p>selamat ulang tahun cantik 😇</p>
+        <button class="btn-reset" onclick="resetToFirst()">🔄 Kembali ke Awal</button>
+    </div>
+
+</div>
+
+<script>
+    let wrongAttempts = 0;
+    const correctPin = "060601";
+
+    function checkPin() {
+        const input = document.getElementById("pinInput").value;
+        const errorMsg = document.getElementById("errorMsg");
+
+        if (input === correctPin) {
+            // Jika benar, reset error dan lanjut ke slide 2
+            errorMsg.innerText = "";
+            wrongAttempts = 0;
+            document.getElementById("pinInput").value = "";
+            nextSlide(2);
+        } else {
+            wrongAttempts++;
+            if (wrongAttempts >= 3) {
+                errorMsg.innerText = `Pin nya adalah "${correctPin}"`;
+            } else {
+                errorMsg.innerText = `PIN salah! Percobaan: ${wrongAttempts}/3`;
+            }
+        }
+    }
+
+    function nextSlide(slideNumber) {
+        // Sembunyikan semua slide
+        const slides = document.querySelectorAll('.slide');
+        slides.forEach(slide => slide.classList.remove('active'));
+
+        // Tampilkan slide yang dituju
+        const targetSlide = document.getElementById(`slide${slideNumber}`);
+        if (targetSlide) {
+            targetSlide.classList.add('active');
+        }
+    }
+
+    function resetToFirst() {
+        // Reset hitungan salah dan inputan di slide 1
+        wrongAttempts = 0;
+        document.getElementById("errorMsg").innerText = "";
+        document.getElementById("pinInput").value = "";
+        nextSlide(1);
+    }
+</script>
+
+</body>
+</html>
